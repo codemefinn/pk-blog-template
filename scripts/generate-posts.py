@@ -1,5 +1,6 @@
 import json
 import re
+import hashlib
 from pathlib import Path
 from datetime import date, datetime
 
@@ -60,7 +61,13 @@ def main():
         files = sorted(POSTS_DIR.rglob("*.md"))
 
         for file_path in files:
-            text = file_path.read_text(encoding="utf-8")
+            content = file_path.read_bytes()
+            text = content.decode("utf-8")
+            
+            sha = hashlib.sha1(
+                b"blob " + str(len(content)).encode() + b"\0" + content
+            ).hexdigest()
+            
             metadata, body = parse_front_matter(text, file_path)
 
             title = metadata.get("title")
@@ -80,7 +87,8 @@ def main():
                 "excerpt": make_excerpt(
                     metadata.get("excerpt"), body
                 ),
-                "path": file_path.as_posix()
+                "path": file_path.as_posix(),
+                "sha": sha
             })
 
     posts.sort(
