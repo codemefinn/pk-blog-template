@@ -1,3 +1,4 @@
+import subprocess
 import json
 import re
 import hashlib
@@ -37,6 +38,15 @@ def normalize_date(value):
 
     return str(value)
 
+def get_last_commit_time(file_path):
+    result = subprocess.run(
+        ["git", "log", "-1", "--format=%cI", "--", str(file_path)],
+        capture_output=True,
+        text=True,
+        check=True
+    )
+
+    return result.stdout.strip()
 
 def make_excerpt(value, body, limit=160):
     if value:
@@ -102,15 +112,23 @@ def main():
                     metadata.get("excerpt"), body
                 ),
                 "path": file_path.as_posix(),
-                "sha": sha
+                "sha": sha,
+                "updated_at": get_last_commit_time(file_path),
             })
 
             posts.append(post)
 
-    posts.sort(
-        key=lambda post: (post["date"], post["slug"]),
-        reverse=True
-    )
+        # Sort by slug alphabetically as the final tie-breaker.
+        posts.sort(key=lambda post: post["slug"])
+        
+        # Sort by date and last commit time, newest first.
+        posts.sort(
+            key=lambda post: (
+                post["date"],
+                datetime.fromisoformat(post["updated_at"]).timestamp()
+            ),
+            reverse=True
+        )
 
     OUTPUT_FILE.write_text(
         json.dumps(posts, ensure_ascii=False, indent=2) + "\n",
