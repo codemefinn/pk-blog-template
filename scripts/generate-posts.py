@@ -79,7 +79,21 @@ def main():
                     f"Missing title, slug, or date in {file_path}"
                 )
 
-            posts.append({
+            post = {
+                key: value
+                for key, value in metadata.items()
+                if key not in {
+                    "title",
+                    "slug",
+                    "date",
+                    "cover",
+                    "excerpt",
+                    "path",
+                    "sha"
+                }
+            }
+
+            post.update({
                 "title": str(title).strip(),
                 "slug": str(slug).strip(),
                 "date": normalize_date(published_date),
@@ -90,6 +104,8 @@ def main():
                 "path": file_path.as_posix(),
                 "sha": sha
             })
+
+            posts.append(post)
 
     posts.sort(
         key=lambda post: (post["date"], post["slug"]),
