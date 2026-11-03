@@ -45,8 +45,14 @@ icon: "https://example.com/avatar.jpg"
 - `icon`: Author avatar or icon. Optional; defaults to your GitHub profile avatar. Set to `null` to hide or enter a custom image URL or emoji to override.
 
 5. Click **Commit changes** to save your post. It may take a few minutes for your post to appear on your Carrd website.
+
+## 2. Deleting a Post
+
+1. Open the `.md` file you want to delete in the `posts/` folder.
+2. Click the three-dot menu (`...`) in the top-right corner and select **Delete file**.
+3. Click the green **Commit changes** button to confirm.
    
-## 2. Supported Formatting
+## 3. Supported Formatting
 
 All Carrd-supported text and link syntax is supported.
 
