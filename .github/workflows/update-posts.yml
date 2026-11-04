@@ -33,7 +33,7 @@ jobs:
       - name: Download post generator
         run: |
           curl -fsSL \
-            https://raw.githubusercontent.com/codemefinn/carrd-blog-template/v1.0.0/scripts/generate-posts.py \
+            https://raw.githubusercontent.com/codemefinn/pk-blog-template/v1.0.0/scripts/generate-posts.py \
             -o /tmp/generate-posts.py
 
       - name: Generate posts.json
