@@ -89,3 +89,72 @@ You can optionally add `{}` to control image width, round and alignment. These s
 ### Line Breaks
 
 Line breaks(Enter) work normally on your Carrd website. However, they may not appear in GitHub's preview when you press Enter. If the preview looks different from what you expected, try adding two spaces at the end of a line before pressing Enter. This is optional and only affects the GitHub preview.
+
+---
+
+# What's New in v1.1.0
+
+## Automatic Features
+
+The following features work automatically without any additional configuration.
+
+### 1. Scheduled Publishing
+
+Schedule posts by setting a future date in the `date` field. All dates use UTC. Posts will remain hidden from your Carrd website until the scheduled date.
+
+```yaml
+date: 2026-11-25
+```
+
+### 2. Dynamic Site Title & Description
+
+When an individual article is loaded, the page's site title and description are automatically updated using the article's `title` and `excerpt`.
+
+### 3. Previous & Next Posts
+
+Previous and next post links are automatically added at the end of each article, allowing visitors to navigate between posts.
+
+## Optional Frontmatter
+
+Add these optional fields to your post's Frontmatter to enable additional features.
+
+### 4. Tags
+
+Add tags to your posts to organize content and enable tag filtering on your Carrd website. Each post can have any number of tags.
+
+```yaml
+tags:
+  - Carrd
+  - Tutorial
+  - Web Design
+```
+
+You can combine this with Carrd elements to create tag-based filtering for your article list.
+
+### 5. Pinned Posts
+
+Pin important posts to keep them at the top of your article list, regardless of their publication date.
+
+```yaml
+pin: true
+```
+
+To unpin a post, change the value to `false` or remove the field.
+
+## Additional Markdown Features
+
+### 6. Copy Blocks
+
+Add a copy button to a code block by wrapping your content with three backticks:
+
+\`\`\`  
+console.log("Hello, world!");  
+\`\`\`
+
+You can also include a language name after the opening three backticks, as you normally would. Syntax highlighting is not currently supported, but this does not affect the copy functionality.
+
+## Navigation Improvement
+
+### 7. Open Articles in a New Tab
+
+Hold `Ctrl` (Windows/Linux) or `⌘ Cmd` (macOS) while clicking an article to open it in a new tab.
