@@ -92,7 +92,7 @@ Line breaks(Enter) work normally on your Carrd website. However, they may not ap
 
 ---
 
-# What's New in v1.1.0
+# What's New in v1.1.1
 
 ## Automatic Features
 
